@@ -1,0 +1,13 @@
+[
+  {
+    "id":"red-wine",
+    "name":"Red Wine",
+    "category":"wine"
+  },
+  {
+    "id":"champagne",
+    "name":"Champagne",
+    "category":"wine"
+  }
+]
+

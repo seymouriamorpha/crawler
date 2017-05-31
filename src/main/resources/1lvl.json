@@ -1,0 +1,20 @@
+[
+  {
+    "id":"wine",
+    "name":"Wine",
+    "volume":14,
+    "preferredUnit":[50,100,250,500]
+  },
+  {
+    "id":"spirits",
+    "name":"Spirits",
+    "volume":40,
+    "preferredUnit":[50,100,150,200,500,1000]
+  },
+  {
+    "id":"beer-cider",
+    "name":"Beer & Cider",
+    "volume":5,
+    "preferredUnit":[330,500,600,1000,2000]
+  }
+]
