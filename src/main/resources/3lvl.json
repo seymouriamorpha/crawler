@@ -407,16 +407,26 @@
 	{
 		"id":"altbier",
 		"name":"Altbier",
-		"categories":["beer-cider", "specialty"]
+		"categories":["beer-cider", "hybrid"]
 	},
 	{
 		"id":"pale-hybrid-beer",
 		"name":"Pale Hybrid Beer",
-		"categories":["beer-cider", "specialty"]
+		"categories":["beer-cider", "hybrid"]
 	},
 	{
 		"id":"amber-hybrid-beer",
 		"name":"Amber Hybrid Beer",
+		"categories":["beer-cider", "hybrid"]
+	},
+	{
+		"id":"sake-rice-wine",
+		"name":"Sake/Rice Wine",
+		"categories":["beer-cider", "specialty"]
+	},
+	{
+		"id":"mead",
+		"name":"Mead",
 		"categories":["beer-cider", "specialty"]
 	}
 ]
