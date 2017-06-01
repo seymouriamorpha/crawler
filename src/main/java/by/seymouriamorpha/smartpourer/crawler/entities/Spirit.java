@@ -9,10 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "spirit")
 public class Spirit extends Alcohol {
 
-    /* % */
     @Field
     private Double volume;
-    /* amount */
     @Field
     private Double value;
     @Field

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class IOUtil {
 
-    public static ArrayList<Spirit> readSpiritsFromFile(String filepath){
+    public static ArrayList<Spirit> readSpiritsFromFile(String filepath) {
 
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -35,4 +35,5 @@ public class IOUtil {
         }
         return null;
     }
+
 }

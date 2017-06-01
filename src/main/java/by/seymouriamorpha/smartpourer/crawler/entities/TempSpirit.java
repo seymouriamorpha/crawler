@@ -26,7 +26,6 @@ public class TempSpirit {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -34,7 +33,6 @@ public class TempSpirit {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -42,7 +40,6 @@ public class TempSpirit {
     public String[] getCategories() {
         return categories;
     }
-
     public void setCategories(String[] categories) {
         this.categories = categories;
     }
@@ -50,7 +47,6 @@ public class TempSpirit {
     public int[] getPreferredUnit() {
         return preferredUnit;
     }
-
     public void setPreferredUnit(int[] preferredUnit) {
         this.preferredUnit = preferredUnit;
     }
@@ -58,7 +54,6 @@ public class TempSpirit {
     public Double getVolume() {
         return volume;
     }
-
     public void setVolume(Double volume) {
         this.volume = volume;
     }
@@ -66,7 +61,6 @@ public class TempSpirit {
     public Double getValue() {
         return value;
     }
-
     public void setValue(Double value) {
         this.value = value;
     }

@@ -14,7 +14,7 @@ public class DBUtil {
     @Autowired
     private SpiritRepository spiritRepository;
 
-    public void saveSpirits(ArrayList<Spirit> spirits){
+    public void saveSpirits(ArrayList<Spirit> spirits) {
         spiritRepository.save(spirits);
         System.out.println("complete");
     }

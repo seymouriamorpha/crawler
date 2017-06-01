@@ -34,7 +34,7 @@ public class Main {
         System.out.println("4th layer complete");
     }
 
-    private static void loadBaseLayers(String filepath,  MongoOperations mongoOperation){
+    private static void loadBaseLayers(String filepath,  MongoOperations mongoOperation) {
         ArrayList<TempSpirit> layer = IOUtil.readTempSpiritsFromFile(filepath);
         for (TempSpirit tempSpirit: layer){
             Spirit spirit = new Spirit();
@@ -52,4 +52,5 @@ public class Main {
             mongoOperation.insert(spirit);
         }
     }
+
 }
