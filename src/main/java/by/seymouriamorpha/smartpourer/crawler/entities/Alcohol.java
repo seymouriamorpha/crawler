@@ -1,7 +1,7 @@
 package by.seymouriamorpha.smartpourer.crawler.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * @author Eugene_Kortelyov on 5/31/2017.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Alcohol {
 
     @Id
@@ -16,7 +17,6 @@ public class Alcohol {
     @Field
     private String name;
     @Field
-//    @DBRef
     private ArrayList<?> categories;
     @Field
     private int[] preferredUnit;

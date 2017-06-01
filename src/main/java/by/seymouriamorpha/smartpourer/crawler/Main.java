@@ -19,17 +19,19 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        ArrayList<Spirit> firstLvlSpirits = IOUtil.readSpiritsFromFile("D:\\alcohol_data\\1lvl.json");
+        ArrayList<Spirit> firstLvlSpirits = IOUtil.readSpiritsFromFile("D:\\workspace\\crawler\\src\\main\\resources\\1lvl.json");
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
         MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
         mongoOperation.insert(firstLvlSpirits, Spirit.class);
         System.out.println("1st layer complete");
 
-        loadBaseLayers("D:\\alcohol_data\\2lvl.json", mongoOperation);
+        loadBaseLayers("D:\\workspace\\crawler\\src\\main\\resources\\2lvl.json", mongoOperation);
         System.out.println("2nd layer complete");
-        loadBaseLayers("D:\\alcohol_data\\3lvl.json", mongoOperation);
+        loadBaseLayers("D:\\workspace\\crawler\\src\\main\\resources\\3lvl.json", mongoOperation);
         System.out.println("3rd layer complete");
+        loadBaseLayers("D:\\workspace\\crawler\\src\\main\\resources\\4lvl.json", mongoOperation);
+        System.out.println("4th layer complete");
     }
 
     private static void loadBaseLayers(String filepath,  MongoOperations mongoOperation){
@@ -40,9 +42,12 @@ public class Main {
             spirit.setName(tempSpirit.getName());
             spirit.setValue(tempSpirit.getValue());
             spirit.setVolume(tempSpirit.getVolume());
+
             ArrayList<Spirit> categories = new ArrayList<>();
-            Spirit base = mongoOperation.findOne(new Query(Criteria.where("_id").is(tempSpirit.getCategory())), Spirit.class);
-            categories.add(base);
+            for (String sp: tempSpirit.getCategories()){
+                Spirit base = mongoOperation.findOne(new Query(Criteria.where("_id").is(sp)), Spirit.class);
+                categories.add(base);
+            }
             spirit.setCategories(categories);
             mongoOperation.insert(spirit);
         }

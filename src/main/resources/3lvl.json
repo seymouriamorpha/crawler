@@ -2,6 +2,421 @@
 	{
 		"id":"white-champagne",
 		"name":"White Champagne",
-		"category":"champagne"
+		"categories":["wine", "champagne"]
+	},
+	{
+		"id":"rose-champagne",
+		"name":"Rose Champagne",
+		"categories":["wine", "champagne"]
+	},
+	{
+		"id":"white-sparkling-wine",
+		"name":"White Sparkling Wine",
+		"categories":["wine", "sparkling-wine"]
+	},
+	{
+		"id":"red-rose-sparkling-wine",
+		"name":"Red/Rose Sparkling Wine",
+		"categories":["wine", "sparkling-wine"]
+	},
+	{
+		"id":"white-icewine",
+		"name":"White Icewine",
+		"categories":["wine", "icewine"]
+	},
+	{
+		"id":"red-icewine",
+		"name":"Red Icewine",
+		"categories":["wine", "icewine"]
+	},
+	{
+		"id":"sparkling-icewine",
+		"name":"Sparkling Icewine",
+		"categories":["wine", "icewine"]
+	},
+	{
+		"id":"european-fortified",
+		"name":"European Fortified",
+		"categories":["wine", "fortified-wine"]
+	},
+	{
+		"id":"madeira-marsala",
+		"name":"Madeira/Marsala",
+		"categories":["wine", "fortified-wine"]
+	},
+	{
+		"id":"port",
+		"name":"Port",
+		"categories":["wine", "fortified-wine"]
+	},
+	{
+		"id":"new-world-fortified",
+		"name":"New World Fortified",
+		"categories":["wine", "fortified-wine"]
+	},
+	{
+		"id":"flavoured-wine",
+		"name":"Flavoured Wine",
+		"categories":["wine", "specialty-wine"]
+	},
+	{
+		"id":"fruit-wine",
+		"name":"Fruit Wine",
+		"categories":["wine", "specialty-wine"]
+	},
+	{
+		"id":"vermouth-aperitif",
+		"name":"Vermouth/Aperitif",
+		"categories":["wine", "specialty-wine"]
+	},
+	{
+		"id":"vs",
+		"name":"VS",
+		"categories":["spirits", "cognac-armagnac"]
+	},
+	{
+		"id":"unique-selections",
+		"name":"Unique Selections",
+		"categories":["spirits", "cognac-armagnac"]
+	},
+	{
+		"id":"xo",
+		"name":"XO",
+		"categories":["spirits", "cognac-armagnac"]
+	},
+	{
+		"id":"vsop",
+		"name":"VSOP",
+		"categories":["spirits", "cognac-armagnac"]
+	},
+	{
+		"id":"canadian-whisky",
+		"name":"Canadian Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"scotch-whisky-blends",
+		"name":"Scotch Whisky Blends",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"scotch-single-malts",
+		"name":"Scotch Single Malts",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"grain-scotch-whisky",
+		"name":"Grain Scotch Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"blended-scotch-whisky",
+		"name":"Blended Scotch Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"organic-whisky",
+		"name":"Organic Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"irish-whiskey",
+		"name":"Irish Whiskey",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"american-whiskey",
+		"name":"American Whiskey",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"indian-whisky",
+		"name":"Indian Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"japanese-whisky",
+		"name":"Japanese Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"english-whisky",
+		"name":"English Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"taiwanese-whisky",
+		"name":"Taiwanese Whisky",
+		"categories":["spirits", "whisky-whiskey"]
+	},
+	{
+		"id":"flavoured-vodka",
+		"name":"Flavoured Vodka",
+		"categories":["spirits", "vodka"]
+	},
+	{
+		"id":"unflavoured-vodka",
+		"name":"Unflavoured Vodka",
+		"categories":["spirits", "vodka"]
+	},
+	{
+		"id":"white-rum",
+		"name":"White Rum",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"flavoured-rum",
+		"name":"Flavoured Rum",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"amber-rum",
+		"name":"Amber Rum",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"dark-rum",
+		"name":"Dark Rum",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"cachaca",
+		"name":"Cachaca",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"spiced-rum",
+		"name":"Spiced Rum",
+		"categories":["spirits", "rum"]
+	},
+	{
+		"id":"reposado",
+		"name":"Reposado",
+		"categories":["spirits", "tequila"]
+	},
+	{
+		"id":"mezcal",
+		"name":"Mezcal",
+		"categories":["spirits", "tequila"]
+	},
+	{
+		"id":"mixto",
+		"name":"Mixto",
+		"categories":["spirits", "tequila"]
+	},
+	{
+		"id":"blanco",
+		"name":"Blanco",
+		"categories":["spirits", "tequila"]
+	},
+	{
+		"id":"anejo",
+		"name":"Añejo",
+		"categories":["spirits", "tequila"]
+	},
+	{
+		"id":"aniseed-liqueur",
+		"name":"Aniseed",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"floral-liqueur",
+		"name":"Floral",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"sweet-flavours-liqueur",
+		"name":"Sweet Flavours",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"bitters-herbs-liqueur",
+		"name":"Bitters/Herbs",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"chocolate-liqueur",
+		"name":"Chocolate",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"nut-liqueur",
+		"name":"Nut",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"coffee-liqueur",
+		"name":"Coffee",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"mint-liqueur",
+		"name":"Mint",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"cream-liqueur",
+		"name":"Cream",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"fruit-flavoured-liqueur",
+		"name":"Fruit Flavoured",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"spice-liqueur",
+		"name":"Spice",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
+		"id":"fruit-spirit-eau-de-vie",
+		"name":"Fruit Spirit",
+		"categories":["spirits", "eau-de-vie"]
+	},
+	{
+		"id":"grappa-grape-spirit",
+		"name":"Grappa/Grape Spirit",
+		"categories":["spirits", "eau-de-vie"]
+	},
+	{
+		"id":"bock",
+		"name":"Bock",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"pale-lager",
+		"name":"Pale Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"dark-lager",
+		"name":"Dark Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"strong-lager",
+		"name":"Strong Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"light-lager",
+		"name":"Light Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"amber-lager",
+		"name":"Amber Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"pilsner",
+		"name":"Pilsner",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"vienna-lager",
+		"name":"Vienna Lager",
+		"categories":["beer-cider", "lager"]
+	},
+	{
+		"id":"pale-ale",
+		"name":"Pale Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"porter",
+		"name":"Porter",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"belgian-ale",
+		"name":"Belgian Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"sour",
+		"name":"Sour",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"dark-brown-ale",
+		"name":"Dark/Brown Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"india-pale-ale",
+		"name":"India Pale Ale (IPA)",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"stout",
+		"name":"Stout",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"wheat-ale",
+		"name":"Wheat",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"strong-ale",
+		"name":"Strong Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"blonde-ale",
+		"name":"Blonde Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"american-ale",
+		"name":"American Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"wheat-rye",
+		"name":"Wheat & Rye",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"scottish-irish-ale",
+		"name":"Scottish & Irish Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"brown-ale",
+		"name":"Brown Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"belgian-strong-ale",
+		"name":"Belgian Strong Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"flavoured-beer",
+		"name":"Flavoured Beer",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"red-ale",
+		"name":"Red Ale",
+		"categories":["beer-cider", "ale"]
+	},
+	{
+		"id":"altbier",
+		"name":"Altbier",
+		"categories":["beer-cider", "specialty"]
+	},
+	{
+		"id":"pale-hybrid-beer",
+		"name":"Pale Hybrid Beer",
+		"categories":["beer-cider", "specialty"]
+	},
+	{
+		"id":"amber-hybrid-beer",
+		"name":"Amber Hybrid Beer",
+		"categories":["beer-cider", "specialty"]
 	}
 ]

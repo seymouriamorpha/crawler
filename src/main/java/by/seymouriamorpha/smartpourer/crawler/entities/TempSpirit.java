@@ -1,13 +1,13 @@
 package by.seymouriamorpha.smartpourer.crawler.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.ArrayList;
 
 /**
  * @author Eugene_Kortelyov on 5/31/2017.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TempSpirit {
 
     @Id
@@ -15,13 +15,13 @@ public class TempSpirit {
     @Field
     private String name;
     @Field
-    private String category;
+    private String[] categories;
     @Field
     private int[] preferredUnit;
     @Field
-    private double volume;
+    private Double volume;
     @Field
-    private double value;
+    private Double value;
 
     public String getId() {
         return id;
@@ -39,12 +39,12 @@ public class TempSpirit {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String[] getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(String[] categories) {
+        this.categories = categories;
     }
 
     public int[] getPreferredUnit() {
@@ -55,19 +55,20 @@ public class TempSpirit {
         this.preferredUnit = preferredUnit;
     }
 
-    public double getVolume() {
+    public Double getVolume() {
         return volume;
     }
 
-    public void setVolume(double volume) {
+    public void setVolume(Double volume) {
         this.volume = volume;
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
+
 }

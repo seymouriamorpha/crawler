@@ -1,3 +1,42 @@
-{
-
-}
+[
+  {
+    "id":"bourbon",
+    "name":"Bourbon",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"corn",
+    "name":"Corn",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"malt",
+    "name":"Malt",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"rye",
+    "name":"Rye",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"tennessee",
+    "name":"Tennessee",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"wheat",
+    "name":"Wheat",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"white-dog",
+    "name":"White Dog",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  },
+  {
+    "id":"other-american",
+    "name":"Other American",
+    "categories":["spirits", "whisky-whiskey", "american-whiskey"]
+  }
+]

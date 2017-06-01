@@ -27,7 +27,6 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 
     public @Bean
     MongoTemplate mongoTemplate() throws Exception {
-        //remove _class
         MappingMongoConverter converter = new MappingMongoConverter(mongoDbFactory(), new MongoMappingContext());
         converter.setTypeMapper(new DefaultMongoTypeMapper(null));
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), converter);

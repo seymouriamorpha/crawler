@@ -2,12 +2,127 @@
   {
     "id":"red-wine",
     "name":"Red Wine",
-    "category":"wine"
+    "categories":["wine"]
+  },
+  {
+    "id":"white-wine",
+    "name":"White Wine",
+    "categories":["wine"]
+  },
+  {
+    "id":"rose-wine",
+    "name":"Rose Wine",
+    "categories":["wine"]
   },
   {
     "id":"champagne",
     "name":"Champagne",
-    "category":"wine"
+    "categories":["wine"]
+  },
+  {
+    "id":"sparkling-wine",
+    "name":"Sparkling Wine",
+    "categories":["wine"]
+  },
+  {
+    "id":"dessert-wine",
+    "name":"Dessert Wine",
+    "categories":["wine"]
+  },
+  {
+    "id":"icewine",
+    "name":"Icewine",
+    "categories":["wine"]
+  },
+  {
+    "id":"fortified-wine",
+    "name":"Fortified Wine",
+    "categories":["wine"]
+  },
+  {
+    "id":"specialty-wine",
+    "name":"Specialty Wine",
+    "categories":["wine"]
+  },
+  {
+    "id":"brandy",
+    "name":"Brandy",
+    "categories":["spirits"]
+  },
+  {
+    "id":"cognac-armagnac",
+    "name":"Cognac/Armagnac",
+    "categories":["spirits"]
+  },
+  {
+    "id":"whisky-whiskey",
+    "name":"Whisky/Whiskey",
+    "categories":["spirits"]
+  },
+  {
+    "id":"vodka",
+    "name":"Vodka",
+    "categories":["spirits"]
+  },
+  {
+    "id":"rum",
+    "name":"Rum",
+    "categories":["spirits"]
+  },
+  {
+    "id":"gin",
+    "name":"Gin",
+    "categories":["spirits"]
+  },
+  {
+    "id":"tequila",
+    "name":"Tequila",
+    "categories":["spirits"]
+  },
+  {
+    "id":"liqueur-liquor",
+    "name":"Liqueur/Liquor",
+    "categories":["spirits"]
+  },
+  {
+    "id":"shochu-soju",
+    "name":"Shochu/Soju",
+    "categories":["spirits"]
+  },
+  {
+    "id":"eau-de-vie",
+    "name":"Eau-de-Vie",
+    "categories":["spirits"]
+  },
+  {
+    "id":"lager",
+    "name":"Lager",
+    "categories":["beer-cider"]
+  },
+  {
+    "id":"ale",
+    "name":"Ale",
+    "categories":["beer-cider"]
+  },
+  {
+    "id":"hybrid",
+    "name":"Hybrid",
+    "categories":["beer-cider"]
+  },
+  {
+    "id":"specialty",
+    "name":"Specialty",
+    "categories":["beer-cider"]
+  },
+  {
+    "id":"radler-shandy",
+    "name":"Radler/Shandy",
+    "categories":["beer-cider"]
+  },
+  {
+    "id":"cider",
+    "name":"Cider",
+    "categories":["beer-cider"]
   }
 ]
 
