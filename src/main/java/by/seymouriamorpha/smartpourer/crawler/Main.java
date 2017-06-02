@@ -16,8 +16,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,9 +49,9 @@ public class Main {
     }
 
     private static void parseLCBO(ArrayList<Link> lcbolinks, MongoOperations mongoOperation) throws IOException {
-        ArrayList<Spirit> spirits = new ArrayList<>();
         ArrayList<String> directs = new ArrayList<>();
         for (Link link: lcbolinks){
+            ArrayList<Spirit> spirits = new ArrayList<>();
             System.out.println("Start parse category: " + link.getLink());
 
             ArrayList<Spirit> categories = new ArrayList<>();
@@ -65,7 +65,6 @@ public class Main {
             int count;
             label: for (count = 0; ; count = count + 12){
                 try {
-                    if (count > 13) break ;
                     Document doc = Jsoup
                             .connect(link.getLink())
                             .data("contentBeginIndex", "0")
@@ -123,13 +122,25 @@ public class Main {
                 String imageURL = "http://lcbo.com" + doc.select("div.images").select("img").attr("src");
 
                 spirit.setName(doc.select("h1").first().text().trim());
-                spirit.setVolume(Double.parseDouble(volume));
-                spirit.setValue(value);
+                spirit.setVolume(value);
+                spirit.setValue(Double.parseDouble(volume));
                 spirit.setImageURL(imageURL);
 
                 spirit.setCategories(categories);
                 spirit.setId(IOUtil.createID(spirit));
                 spirits.add(spirit);
+
+                URL url = new URL(spirit.getImageURL());
+                InputStream is = url.openStream();
+                OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\images\\" + spirit.getId()+".png");
+                byte[] b = new byte[2048];
+                int length;
+                while ((length = is.read(b)) != -1) {
+                    os.write(b, 0, length);
+                }
+                is.close();
+                os.close();
+
                 System.out.println("Spirit complete: " + spirit.getProductURL());
             }
             ObjectMapper mapper = new ObjectMapper();
