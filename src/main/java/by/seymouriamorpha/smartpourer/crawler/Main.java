@@ -19,8 +19,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * @author Eugene_Kortelyov on 5/31/2017.
