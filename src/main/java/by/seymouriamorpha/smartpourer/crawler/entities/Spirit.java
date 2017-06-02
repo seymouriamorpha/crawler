@@ -1,14 +1,27 @@
 package by.seymouriamorpha.smartpourer.crawler.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.ArrayList;
 
 /**
  * @author Eugene_Kortelyov on 5/31/2017.
  */
 @Document(collection = "spirit")
-public class Spirit extends Alcohol {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Spirit {
 
+    @Id
+    private String id;
+    @Field
+    private String name;
+    @Field
+    private ArrayList<Spirit> categories;
+    @Field
+    private int[] preferredUnit;
     @Field
     private Double volume;
     @Field
@@ -17,6 +30,34 @@ public class Spirit extends Alcohol {
     private String productURL;
     @Field
     private String imageURL;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Spirit> getCategories() {
+        return categories;
+    }
+    public void setCategories(ArrayList<Spirit> categories) {
+        this.categories = categories;
+    }
+
+    public int[] getPreferredUnit() {
+        return preferredUnit;
+    }
+    public void setPreferredUnit(int[] preferredUnit) {
+        this.preferredUnit = preferredUnit;
+    }
 
     public Double getVolume() {
         return volume;
@@ -45,5 +86,7 @@ public class Spirit extends Alcohol {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
+
 
 }
