@@ -17,7 +17,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +33,7 @@ public class Main {
         MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
         /* load base spirits */
-       /* ArrayList<Spirit> firstLvlSpirits = IOUtil.readSpiritsFromFile("D:\\workspace\\crawler\\src\\main\\resources\\1lvl.json");
+        /*ArrayList<Spirit> firstLvlSpirits = IOUtil.readSpiritsFromFile("D:\\workspace\\crawler\\src\\main\\resources\\1lvl.json");
         mongoOperation.insert(firstLvlSpirits, Spirit.class);
         System.out.println("1st layer complete");
         loadBaseLayers("D:\\workspace\\crawler\\src\\main\\resources\\2lvl.json", mongoOperation);
@@ -47,8 +49,8 @@ public class Main {
     }
 
     private static void parseLCBO(ArrayList<Link> lcbolinks, MongoOperations mongoOperation) throws IOException {
-        ArrayList<String> directs = new ArrayList<>();
         for (Link link: lcbolinks){
+            ArrayList<String> directs = new ArrayList<>();
             ArrayList<Spirit> spirits = new ArrayList<>();
             System.out.println("Start parse category: " + link.getLink());
 
@@ -128,16 +130,20 @@ public class Main {
                 spirit.setId(IOUtil.createID(spirit));
                 spirits.add(spirit);
 
-                URL url = new URL(spirit.getImageURL());
-                InputStream is = url.openStream();
-                OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\images\\" + spirit.getId()+".png");
-                byte[] b = new byte[2048];
-                int length;
-                while ((length = is.read(b)) != -1) {
-                    os.write(b, 0, length);
+                try {
+                    URL url = new URL(spirit.getImageURL());
+                    InputStream is = url.openStream();
+                    OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\images\\" + spirit.getId() + ".png");
+                    byte[] b = new byte[2048];
+                    int length;
+                    while ((length = is.read(b)) != -1) {
+                        os.write(b, 0, length);
+                    }
+                    is.close();
+                    os.close();
+                } catch (IOException ioe){
+                    System.out.println("skip loading image: " + spirit.getProductURL());
                 }
-                is.close();
-                os.close();
 
                 System.out.println("Spirit complete: " + spirit.getProductURL());
             }

@@ -21,7 +21,7 @@ public class Spirit {
     @Field
     private ArrayList<Spirit> categories;
     @Field
-    private int[] preferredUnit;
+    private ArrayList<PreferredUnit> preferredUnit;
     @Field
     private Double volume;
     @Field
@@ -52,10 +52,10 @@ public class Spirit {
         this.categories = categories;
     }
 
-    public int[] getPreferredUnit() {
+    public ArrayList<PreferredUnit> getPreferredUnit() {
         return preferredUnit;
     }
-    public void setPreferredUnit(int[] preferredUnit) {
+    public void setPreferredUnit(ArrayList<PreferredUnit> preferredUnit) {
         this.preferredUnit = preferredUnit;
     }
 

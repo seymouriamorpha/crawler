@@ -50,24 +50,11 @@ public class IOUtil {
     }
 
     public static String createID(Spirit spirit){
-        /*String val = spirit.getName()
-                .toLowerCase()
-                .replace("(", "")
-                .replace(")", "")
-                .replace("#", "")
-                .replace("'", "")
-                .replace(" ", "-")
-                .replace(".", "-")
-                .replace("/","-")
-                .replace("*","")
-                + "-"
-                + spirit.getVolume()
-                + spirit.getValue();
-        return val.replace(".0", "");*/
         String id = spirit.getProductURL();
         int start = id.indexOf("product/")  + 8;
         int end = id.substring(start).indexOf("/");
         String result = id.substring(start, start + end) + "-" + idcount;
+        System.out.println("Last used ID is " + idcount);
         idcount++;
         return result;
     }

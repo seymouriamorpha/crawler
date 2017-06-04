@@ -20,6 +20,16 @@
 		"categories":["wine", "sparkling-wine"]
 	},
 	{
+		"id": "red-dessert-wine",
+		"name": "Red Dessert Wine",
+		"categories": [ "wine", "dessert-wine"]
+	},
+	{
+		"id":"white-dessert-wine",
+		"name":"White Dessert Wine",
+		"categories":["wine", "dessert-wine"]
+	},
+	{
 		"id":"white-icewine",
 		"name":"White Icewine",
 		"categories":["wine", "icewine"]
