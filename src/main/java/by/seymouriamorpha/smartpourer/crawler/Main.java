@@ -17,9 +17,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**

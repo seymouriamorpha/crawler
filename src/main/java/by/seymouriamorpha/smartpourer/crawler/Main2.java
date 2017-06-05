@@ -1,14 +1,12 @@
 package by.seymouriamorpha.smartpourer.crawler;
 
 import by.seymouriamorpha.smartpourer.crawler.entities.Spirit;
-import by.seymouriamorpha.smartpourer.crawler.utils.IOUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;

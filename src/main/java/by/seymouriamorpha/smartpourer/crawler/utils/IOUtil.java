@@ -5,7 +5,6 @@ import by.seymouriamorpha.smartpourer.crawler.entities.Spirit;
 import by.seymouriamorpha.smartpourer.crawler.entities.TempSpirit;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sun.security.provider.ConfigFile;
 
 import java.io.File;
 import java.io.IOException;
