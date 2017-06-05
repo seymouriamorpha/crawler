@@ -16,7 +16,10 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -107,14 +110,24 @@ public class Main {
                 } catch (Exception e){
                     continue label2;
                 }
-                String volume_value = doc.select("span.strength").first().text();
+                String volume_value;
+                try {
+                    volume_value = doc.select("span.strength").first().text();
+                } catch (Exception e){
+                    continue label2;
+                }
+
+                String value, volume, name, imageURL;
+
                 int delimeter = volume_value.indexOf("/");
-
-                String value = volume_value.substring(0, delimeter).replace("cl", "").replace("/", "");
-                String volume = volume_value.substring(delimeter + 1).replace("%", "").replace("/", "");
-                String name = doc.select("h1[itemprop]").text();
-                String imageURL = doc.select("img.lazy").attr("data-original");
-
+                try {
+                    value = volume_value.substring(0, delimeter).replace("cl", "").replace("/", "");
+                    volume = volume_value.substring(delimeter + 1).replace("%", "").replace("/", "");
+                    name = doc.select("h1[itemprop]").text();
+                    imageURL = doc.select("img.lazy").attr("data-original");
+                } catch (Exception e){
+                    continue label2;
+                }
 
                 spirit.setName(name.trim());
                 spirit.setVolume(Double.parseDouble(value));
@@ -125,10 +138,10 @@ public class Main {
                 spirit.setId(IOUtil.createTWEID(spirit));
                 spirits.add(spirit);
 
-                try {
-                    URL url = new URL(spirit.getImageURL());
+                /*try {
+                    URL url = new URL(spirit.getImageURL().replace("https", "http"));
                     InputStream is = url.openStream();
-                    OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\images\\" + spirit.getId() + ".png");
+                    OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\twe\\images\\" + spirit.getId() + ".jpg");
                     byte[] b = new byte[2048];
                     int length;
                     while ((length = is.read(b)) != -1) {
@@ -137,13 +150,27 @@ public class Main {
                     is.close();
                     os.close();
                 } catch (IOException ioe){
-                    System.out.println("skip loading image: " + spirit.getProductURL());
+                    System.out.println("skip loading image: " + spirit.getProductURL() + "|" + spirit.getImageURL());
+                }*/
+
+                try {
+                    URL url = new URL(spirit.getImageURL().replace("https", "http"));
+                    HttpURLConnection connection = (HttpURLConnection) url
+                            .openConnection();
+                    connection.setRequestProperty(
+                            "User-Agent",
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
+                    BufferedImage image = ImageIO.read(connection.getInputStream());
+                    File outputfile = new File("d:\\alcohol_data\\new\\twe\\images\\" + spirit.getId() + ".png");
+                    ImageIO.write(image, "png", outputfile);
+                } catch (Exception e){
+                    System.out.println("skip loading image: " + spirit.getProductURL() + "|" + spirit.getImageURL());
                 }
 
                 System.out.println("Spirit complete: " + spirit.getProductURL());
             }
             ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(new File("d:\\alcohol_data\\new\\" + link.getId() + ".json"), spirits);
+            mapper.writeValue(new File("d:\\alcohol_data\\new\\twe\\" + link.getId() + ".json"), spirits);
         }
     }
 
