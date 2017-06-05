@@ -144,6 +144,8 @@ public class Main {
 
                 System.out.println("Spirit complete: " + spirit.getProductURL());
             }
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(new File("d:\\alcohol_data\\new\\" + link.getId() + ".json"), spirits);
         }
     }
 
