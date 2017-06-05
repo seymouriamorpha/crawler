@@ -280,6 +280,11 @@
 		"categories":["spirits", "liqueur-liquor"]
 	},
 	{
+		"id":"jenever",
+		"name":"Jenever",
+		"categories":["spirits", "liqueur-liquor"]
+	},
+	{
 		"id":"fruit-spirit-eau-de-vie",
 		"name":"Fruit Spirit",
 		"categories":["spirits", "eau-de-vie"]
@@ -438,5 +443,15 @@
 		"id":"mead",
 		"name":"Mead",
 		"categories":["beer-cider", "specialty"]
+	},
+	{
+		"id":"calvados",
+		"name":"Calvados",
+		"categories":["spirits", "brandy"]
+	},
+	{
+		"id":"golden-rum",
+		"name":"Golden Rum",
+		"categories":["spirits", "rum"]
 	}
 ]

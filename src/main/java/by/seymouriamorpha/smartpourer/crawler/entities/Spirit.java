@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author Eugene_Kortelyov on 5/31/2017.
@@ -87,6 +88,19 @@ public class Spirit {
         this.imageURL = imageURL;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Spirit other = (Spirit) obj;
+        return Objects.equals(name, other.name) && value == other.value && volume == other.volume;
+    }
 
 }

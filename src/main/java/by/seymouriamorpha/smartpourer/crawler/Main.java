@@ -43,9 +43,108 @@ public class Main {
         loadBaseLayers("D:\\workspace\\crawler\\src\\main\\resources\\4lvl.json", mongoOperation);
         System.out.println("4th layer complete");*/
 
-        /* load lcbo links */
-        ArrayList<Link> lcbolinks = IOUtil.readLCBOLinksFromFile("D:\\workspace\\crawler\\src\\main\\resources\\lcbo.json");
-        parseLCBO(lcbolinks, mongoOperation);
+        /* load lcbo data */
+        /*ArrayList<Link> lcbolinks = IOUtil.readLCBOLinksFromFile("D:\\workspace\\crawler\\src\\main\\resources\\lcbo.json");
+        parseLCBO(lcbolinks, mongoOperation);*/
+
+        /* load TWE data */
+        ArrayList<Link> twelinks = IOUtil.readLCBOLinksFromFile("D:\\workspace\\crawler\\src\\main\\resources\\twe.json");
+        parseTWE(twelinks, mongoOperation);
+    }
+
+    private static void parseTWE(ArrayList<Link> twelinks, MongoOperations mongoOperation) throws IOException {
+        for (Link link: twelinks){
+            ArrayList<String> directs = new ArrayList<>();
+            ArrayList<Spirit> spirits = new ArrayList<>();
+            System.out.println("Start parse category: " + link.getLink());
+
+            ArrayList<Spirit> categories = new ArrayList<>();
+            Spirit temp = mongoOperation.findOne(new Query(Criteria.where("_id").is(link.getId())), Spirit.class);
+            for (Spirit category: temp.getCategories()){
+                Spirit cata = mongoOperation.findOne(new Query(Criteria.where("_id").is(category.getId())), Spirit.class);
+                categories.add(cata);
+            }
+            categories.add(temp);
+
+            int count;
+            label: for (count = 1; ; count+=1) {
+                try {
+                    Document doc = Jsoup
+                            .connect(link.getLink() + "?pg=" + count)
+                            .timeout(3000)
+                            .get();
+                    if (doc.select("div.products-wrapper").select("li").text().equals("Your search did not find any products; please change your search criteria.")){
+                        doc = Jsoup
+                                .connect(link.getLink() + "&pg=" + count)
+                                .timeout(3000)
+                                .get();
+                    }
+                    Elements directLinks = doc
+                            .select("div.products-wrapper")
+                            .select("div.products-grid")
+                            .select("div.group-list")
+                            .select("div.item")
+                            .select("a.product");
+                    if (directLinks.size() == 0) {
+                        break;
+                    }
+                    for (Element element: directLinks) {
+                        String productURL = "https://www.thewhiskyexchange.com" + element.attr("href");
+                        System.out.println("Found link: " + productURL);
+                        directs.add(productURL);
+                    }
+                } catch (Exception e) {
+                    count -= 12;
+                    continue label;
+                }
+            }
+
+            label2:for (String directLink: directs) {
+                Spirit spirit = new Spirit();
+                spirit.setProductURL(directLink);
+                Document doc;
+                try{
+//                    if (spirit.getProductURL().contains("em-vinhas-velhas-reserva")) continue ;
+                    doc = Jsoup.connect(spirit.getProductURL()).get();
+                } catch (Exception e){
+                    continue label2;
+                }
+                String volume_value = doc.select("span.strength").first().text();
+                int delimeter = volume_value.indexOf("/");
+
+                String value = volume_value.substring(0, delimeter).replace("cl", "").replace("/", "");
+                String volume = volume_value.substring(delimeter + 1).replace("%", "").replace("/", "");
+                String name = doc.select("h1[itemprop]").text();
+                String imageURL = doc.select("img.lazy").attr("data-original");
+
+
+                spirit.setName(name.trim());
+                spirit.setVolume(Double.parseDouble(value));
+                spirit.setValue(Double.parseDouble(volume));
+                spirit.setImageURL(imageURL);
+
+                spirit.setCategories(categories);
+                spirit.setId(IOUtil.createTWEID(spirit));
+                spirits.add(spirit);
+
+                try {
+                    URL url = new URL(spirit.getImageURL());
+                    InputStream is = url.openStream();
+                    OutputStream os = new FileOutputStream("d:\\alcohol_data\\new\\images\\" + spirit.getId() + ".png");
+                    byte[] b = new byte[2048];
+                    int length;
+                    while ((length = is.read(b)) != -1) {
+                        os.write(b, 0, length);
+                    }
+                    is.close();
+                    os.close();
+                } catch (IOException ioe){
+                    System.out.println("skip loading image: " + spirit.getProductURL());
+                }
+
+                System.out.println("Spirit complete: " + spirit.getProductURL());
+            }
+        }
     }
 
     private static void parseLCBO(ArrayList<Link> lcbolinks, MongoOperations mongoOperation) throws IOException {

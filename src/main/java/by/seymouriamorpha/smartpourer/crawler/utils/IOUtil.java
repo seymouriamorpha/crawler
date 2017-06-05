@@ -5,6 +5,7 @@ import by.seymouriamorpha.smartpourer.crawler.entities.Spirit;
 import by.seymouriamorpha.smartpourer.crawler.entities.TempSpirit;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import sun.security.provider.ConfigFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +58,10 @@ public class IOUtil {
         System.out.println("Last used ID is " + idcount);
         idcount++;
         return result;
+    }
+
+    public static String createTWEID(Spirit spirit){
+        return spirit.getProductURL().substring(spirit.getProductURL().lastIndexOf("/")+1);
     }
 
 }
