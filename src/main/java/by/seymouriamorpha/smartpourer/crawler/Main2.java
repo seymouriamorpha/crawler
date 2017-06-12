@@ -18,16 +18,18 @@ public class Main2 {
 
     public static void main(String[] args) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File folder = new File("d:\\alcohol_data\\new\\twe");
+        /*File folder = new File("d:\\alcohol_data\\06.06.2017\\");
         File[] listOfFiles = folder.listFiles();
 
         ArrayList<Spirit> spirits = new ArrayList<>();
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                spirits.addAll(mapper.readValue(new File("d:\\alcohol_data\\new\\twe\\" + listOfFiles[i].getName()),  new TypeReference<List<Spirit>>(){}));
+                spirits.addAll(mapper.readValue(new File("d:\\alcohol_data\\06.06.2017\\" + listOfFiles[i].getName()),  new TypeReference<List<Spirit>>(){}));
             }
-        }
+        }*/
+
+        ArrayList<Spirit> spirits = mapper.readValue(new File("d:\\alcohol_data\\06.06.2017\\all_data.json"),  new TypeReference<List<Spirit>>(){});
 
         System.out.println(spirits.size());
 
@@ -41,7 +43,7 @@ public class Main2 {
 
         System.out.println(result.size());
 
-        mapper.writeValue(new File("d:\\alcohol_data\\new\\twe\\all_twe_data.json"), spirits);
+//        mapper.writeValue(new File("d:\\alcohol_data\\06.06.2017\\all_data.json"), spirits);
 
     }
 
