@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     compile("org.jsoup:jsoup:1.10.2")
+    compile("com.ui4j:ui4j-webkit:2.1.0")
     compile("com.fasterxml.jackson.core:jackson-databind:2.9.0.pr2")
     compile("org.springframework.data:spring-data-mongodb:1.10.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb:1.5.2.RELEASE")

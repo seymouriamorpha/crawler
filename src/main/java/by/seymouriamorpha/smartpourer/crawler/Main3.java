@@ -1,16 +1,27 @@
 package by.seymouriamorpha.smartpourer.crawler;
 
+import by.seymouriamorpha.smartpourer.crawler.entities.Spirit;
 import by.seymouriamorpha.smartpourer.crawler.entities.SpiritWithBars;
+import by.seymouriamorpha.smartpourer.crawler.repository.SpringMongoConfig;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ui4j.api.browser.BrowserEngine;
+import com.ui4j.api.browser.BrowserFactory;
+import com.ui4j.api.browser.Page;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.File;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Eugene_Kortelyov on 6/12/2017.
@@ -18,6 +29,9 @@ import java.util.List;
 public class Main3 {
 
     public static void main(String[] args) throws Exception {
+
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+        MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
         ArrayList<String> links = new ArrayList<>();
         links.add("https://www.proof66.com/liquor/whiskey.html");
@@ -27,12 +41,19 @@ public class Main3 {
         links.add("https://www.proof66.com/liquor/rum.html");
         links.add("https://www.proof66.com/liquor/tequila.html");
 
-        ArrayList<SpiritWithBars> spirits = new ArrayList<>();
+//        ArrayList<SpiritWithBars> spirits = new ArrayList<>();
         ArrayList<SpiritWithBars> result = new ArrayList<>();
 
         /* get all direct link for category */
         for (String link: links){
-            Document doc = Jsoup.connect(link).get();
+            ArrayList<SpiritWithBars> spirits = new ArrayList<>();
+            System.out.println("Current category: " + link);
+
+            BrowserEngine browser = BrowserFactory.getWebKit();
+            Page page = browser.navigate(link);
+
+//            Document doc = Jsoup.connect(link).get();
+            Document doc = Jsoup.parse(page.getDocument().getBody().toString());
             Elements directLinks = doc
                     .select("span.font14s480")
                     .select("span.font600")
@@ -43,13 +64,28 @@ public class Main3 {
                 spirit.setProductURL(element.attr("href").replace("..", "https://proof66.com"));
                 spirits.add(spirit);
             }
+            System.out.println("Found " + directLinks.size() + " links");
 
-            for (SpiritWithBars spirit: spirits) {
+            ArrayList<Spirit> categories = new ArrayList<>();
+            Spirit temp = mongoOperation.findOne(new Query(Criteria.where("_id").is(getCategory(link))), Spirit.class);
+            for (Spirit category: temp.getCategories()){
+                Spirit cata = mongoOperation.findOne(new Query(Criteria.where("_id").is(category.getId())), Spirit.class);
+                categories.add(cata);
+            }
+            categories.add(temp);
+
+            /* if we found barcodes - get all other data */
+            label: for (SpiritWithBars spirit: spirits) {
                 ArrayList<String> bars = new ArrayList<>();
                 ArrayList<String> bars_res = new ArrayList<>();
 
-
-                Document document = Jsoup.connect(spirit.getProductURL()).get();
+                Document document;
+                try {
+                    document = Jsoup.connect(spirit.getProductURL()).timeout(5000).get();
+                } catch (Exception exception){
+                    continue label;
+                }
+                System.out.println("Current alcohol URL: " + spirit.getProductURL());
                 Elements barcodes = document.select("li.list-circle");
 
                 for (Element element: barcodes) {
@@ -68,118 +104,29 @@ public class Main3 {
                     swb.setName(spirit.getName());
                     swb.setProductURL(spirit.getProductURL());
 
+                    Elements volumes = document.select("span.font16").select("span.fontRatingInfos320");
+                    for (Element vol: volumes){
+                        if (vol.text().contains("%") && vol.text().length() < 7){
+                            swb.setValue(Double.parseDouble(vol.text().replace("%", "")));
+                        }
+                    }
 
+                    Element image = document.select("ul.mainimage").select("img").first();
+                    swb.setImageURL(image.attr("src").replace("..", "https://www.proof66.com/image"));
 
+                    swb.setCategories(categories);
+
+                    int start = swb.getProductURL().lastIndexOf("/");
+                    int end = swb.getProductURL().lastIndexOf(".");
+                    swb.setId(swb.getProductURL().substring(start + 1, end));
+
+                    result.add(swb);
                 }
-
-
-            }
-        }
-
-        /* get all data */
-
-        for (SpiritWithBars spirit: spirits) {
-            ArrayList<String> bars = new ArrayList<>();
-
-            Document document = Jsoup.connect(spirit.getProductURL()).get();
-            Elements barcodes = document.select("li.list-circle");
-
-            for (Element element: barcodes) {
-                bars.add(element.text());
-            }
-            spirit.setBars(bars);
-
-            for (String bar: spirit.getBars()){
-                if (bar.matches("-?\\d+(\\.\\d+)?")){
-                    bars.add(bar);
-                }
-            }
-
-
-            /*
-            if (!bars.isEmpty()) {
-                result.add(spirit);
-            }
-            */
-        }
-
-        ArrayList<SpiritWithBars> result1 = new ArrayList<>();
-
-        for (SpiritWithBars spiritWithBars: result){
-            ArrayList<String> bars = new ArrayList<>();
-            for (String bar: spiritWithBars.getBars()){
-                if (bar.matches("-?\\d+(\\.\\d+)?")){
-                    bars.add(bar);
-                }
-            }
-
-            if (!bars.isEmpty()){
-                SpiritWithBars withBars = new SpiritWithBars();
-                withBars.setBars(bars);
-                withBars.setName(spiritWithBars.getName());
-                withBars.setProductURL(spiritWithBars.getProductURL());
-                result1.add(withBars);
             }
         }
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(new File("d:\\proof66.json"), result);
-
-        /*Document doc = Jsoup.connect("https://www.proof66.com/liquor/whiskey.html").get();
-        Elements directLinks = doc
-                .select("span.font14s480")
-                .select("span.font600")
-                .select("a");
-        for (Element element: directLinks)
-        {
-            SpiritWithBars spirit = new SpiritWithBars();
-            spirit.setName(element.text());
-            spirit.setProductURL(element.attr("href").replace("..", "https://proof66.com"));
-            spirits.add(spirit);
-        }
-
-        for (SpiritWithBars spirit: spirits)
-        {
-            ArrayList<String> bars = new ArrayList<>();
-
-            Document document = Jsoup.connect(spirit.getProductURL()).get();
-            Elements barcodes = document.select("li.list-circle");
-
-            for (Element element: barcodes)
-            {
-                bars.add(element.text());
-            }
-            spirit.setBars(bars);
-
-            if (!bars.isEmpty())
-            {
-                result.add(spirit);
-            }
-        }*/
-
-        /*ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File("d:\\proof66.json"), result);*/
-
-//        spirits.addAll(mapper.readValue(new File("d:\\proof66_whiskey.json"), new TypeReference<List<SpiritWithBars>>(){}));
-
-        /*for (SpiritWithBars spiritWithBars: spirits){
-            ArrayList<String> bars = new ArrayList<>();
-            for (String bar: spiritWithBars.getBars()){
-                if (bar.matches("-?\\d+(\\.\\d+)?")){
-                    bars.add(bar);
-                }
-            }
-
-            if (!bars.isEmpty()){
-                SpiritWithBars withBars = new SpiritWithBars();
-                withBars.setBars(bars);
-                withBars.setName(spiritWithBars.getName());
-                withBars.setProductURL(spiritWithBars.getProductURL());
-                result.add(withBars);
-            }
-        }
-
-        mapper.writeValue(new File("d:\\proof66_whiskey_new.json"), result);*/
 
     }
 
